@@ -92,3 +92,4 @@ __pycache__/
 # Local WordPress Environment
 .wp-env.json
 update-plugins.sh
+install-plugins.sh
