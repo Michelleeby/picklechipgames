@@ -1,0 +1,8 @@
+{
+  "name": "picklechipgames",
+  "version": "1.0.0",
+  "description": "Pickle Chip Games WordPress Environment",
+  "scripts": {
+    "update-plugins": "./update-plugins.sh"
+  }
+} 

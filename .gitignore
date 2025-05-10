@@ -1,0 +1,94 @@
+# Local secrets directory
+local_secrets/
+local_secrets/**/*
+
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+yarn.lock
+package-lock.json
+/vendor/
+vendor/
+**/vendor/
+
+# Testing
+/coverage
+.nyc_output
+
+# Production
+/build
+/dist
+/out
+/.next
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+debug.log
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+*.sublime-workspace
+*.sublime-project
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.log
+*.tmp
+*.temp
+.cache/
+.temp/
+tmp/
+
+# Build artifacts
+*.pyc
+__pycache__/
+*.class
+*.jar
+*.war
+*.ear
+
+# Database files
+*.sqlite
+*.sqlite3
+*.db
+
+# Certificate files
+*.pem
+*.key
+*.crt
+*.cer
+*.der
+*.p12
+*.pfx
+
+# Backup files
+*.bak
+*.backup
+*~ 
+
+# Local WordPress Environment
+.wp-env.json
+update-plugins.sh

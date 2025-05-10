@@ -1,0 +1,14 @@
+{
+  "name": "picklechipgames/pcg-campaign-route99",
+  "description": "Route 99 campaign plugin.",
+  "type": "wordpress-plugin",
+  "require": {
+    "pimple/pimple": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "PCG\\CampaignRoute99\\": "includes/"
+    }
+  },
+  "license": "GPL-2.0-or-later"
+} 
