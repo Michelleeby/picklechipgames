@@ -17,9 +17,12 @@ vendor/
 .nyc_output
 
 # Production
-/build
+/build/
+build/
 /dist
+dist/
 /out
+out/
 /.next
 
 # Environment files
@@ -93,4 +96,7 @@ __pycache__/
 .wp-env.json
 
 # Gutenberg Utility Scripts
-wp-gutenberg-utils
+*.sh
+
+# WordPress Gutenberg Utility Scripts
+wp-gutenberg-utils/
