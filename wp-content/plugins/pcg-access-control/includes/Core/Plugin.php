@@ -100,7 +100,7 @@ class Plugin {
                 foreach ($campaigns as $campaign) {
                     $campaign_roles[] = sprintf(
                         '%s (%s)',
-                        get_the_title($campaign->campaign_id),
+                        get_the_title($campaign->campaign_slug),
                         $campaign->role
                     );
                 }

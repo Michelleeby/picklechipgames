@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "Pickle Chip Games WordPress Environment",
   "scripts": {
-    "update-plugins": "./update-plugins.sh",
-    "install-plugins": "./install-plugins.sh"
+    "build": "wp-scripts build",
+    "start": "wp-scripts start",
+    "update-plugins": "./run-plugin-script.sh update-plugins.sh",
+    "install-plugins": "./run-plugin-script.sh install-plugins.sh",
+    "build-plugins": "./run-plugin-script.sh build-plugins.sh"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^30.16.0"
   }
-} 
+}

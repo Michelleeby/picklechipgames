@@ -83,7 +83,7 @@ class Roles {
         }
     }
 
-    public static function assign_user_to_campaign($user_id, $campaign_id, $role) {
+    public static function assign_user_to_campaign($user_id, $campaign_slug, $role) {
         if (!in_array($role, [self::ROLE_GAME_MANAGER, self::ROLE_ADVENTURER])) {
             return false;
         }
@@ -95,15 +95,15 @@ class Roles {
             $table_name,
             [
                 'user_id' => $user_id,
-                'campaign_id' => $campaign_id,
+                'campaign_slug' => $campaign_slug,
                 'role' => $role,
                 'created_at' => current_time('mysql'),
             ],
-            ['%d', '%d', '%s', '%s']
+            ['%d', '%s', '%s', '%s']
         );
     }
 
-    public static function remove_user_from_campaign($user_id, $campaign_id) {
+    public static function remove_user_from_campaign($user_id, $campaign_slug) {
         global $wpdb;
         $table_name = $wpdb->prefix . 'pcg_campaign_users';
 
@@ -111,9 +111,9 @@ class Roles {
             $table_name,
             [
                 'user_id' => $user_id,
-                'campaign_id' => $campaign_id,
+                'campaign_slug' => $campaign_slug,
             ],
-            ['%d', '%d']
+            ['%d', '%s']
         );
     }
 
@@ -123,20 +123,20 @@ class Roles {
 
         return $wpdb->get_results(
             $wpdb->prepare(
-                "SELECT campaign_id, role FROM $table_name WHERE user_id = %d",
+                "SELECT campaign_slug, role FROM $table_name WHERE user_id = %d",
                 $user_id
             )
         );
     }
 
-    public static function get_campaign_users($campaign_id) {
+    public static function get_campaign_users($campaign_slug) {
         global $wpdb;
         $table_name = $wpdb->prefix . 'pcg_campaign_users';
 
         return $wpdb->get_results(
             $wpdb->prepare(
-                "SELECT user_id, role FROM $table_name WHERE campaign_id = %d",
-                $campaign_id
+                "SELECT user_id, role FROM $table_name WHERE campaign_slug = %s",
+                $campaign_slug
             )
         );
     }

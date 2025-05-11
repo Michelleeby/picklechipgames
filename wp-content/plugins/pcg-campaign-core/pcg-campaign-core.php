@@ -29,4 +29,16 @@ if (file_exists(PCG_CAMPAIGN_CORE_PLUGIN_DIR . 'vendor/autoload.php')) {
 add_action('plugins_loaded', function() {
     $container = PCG\CampaignCore\Core\Container::getInstance();
     $plugin = $container['plugin'];
-}); 
+});
+
+// Enqueue block editor JS for the example block (built file)
+add_action('enqueue_block_editor_assets', function() {
+    wp_enqueue_script(
+        'pcg-campaign-core-example-block',
+        plugins_url('blocks/build/example-block/index.js', __FILE__),
+        [ 'wp-blocks', 'wp-element', 'wp-editor' ]
+    );
+});
+
+// Require the PHP block registration file
+require_once __DIR__ . '/blocks/register.php'; 
