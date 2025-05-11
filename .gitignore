@@ -92,5 +92,5 @@ __pycache__/
 # Local WordPress Environment
 .wp-env.json
 
-# Scripts
-*.sh
+# Gutenberg Utility Scripts
+wp-gutenberg-utils

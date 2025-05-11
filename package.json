@@ -5,10 +5,11 @@
   "scripts": {
     "build": "wp-scripts build",
     "start": "wp-scripts start",
-    "plugins:install": "./pcg-utils-install-plugins.sh",
-    "plugins:update": "./pcg-utils-update-plugins.sh",
-    "plugins:build": "./pcg-utils-build-plugins.sh",
-    "plugins:generate-imports": "./pcg-utils-generate-block-imports.sh",
+    "plugins:install": "./wp-gutenberg-utils/wpg-utils.sh install",
+    "plugins:update": "./wp-gutenberg-utils/wpg-utils.sh update",
+    "plugins:build": "./wp-gutenberg-utils/wpg-utils.sh build",
+    "plugins:generate-imports": "./wp-gutenberg-utils/wpg-utils.sh generate",
+    "plugins:config": "./wp-gutenberg-utils/wpg-utils.sh config",
     "plugins:deploy-prep": "npm run plugins:install && npm run plugins:update && npm run plugins:generate-imports && npm run plugins:build"
   },
   "devDependencies": {
