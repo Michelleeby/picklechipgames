@@ -1,54 +1,36 @@
 <?php
-
 namespace PCG\AccessControl\Core;
 
-use ArrayAccess;
+use PCG\Shared\BaseContainer;
 
-class Container implements ArrayAccess {
+class Container extends BaseContainer {
     private static $instance = null;
-    private $container = [];
 
-    private function __construct() {
-        $this->container['plugin'] = new Plugin();
-    }
-
-    public static function getInstance() {
-        if (self::$instance === null) {
+    public static function getInstance(): self {
+        if (null === self::$instance) {
             self::$instance = new self();
         }
         return self::$instance;
     }
 
-    public function __get($name) {
-        if (isset($this->container[$name])) {
-            return $this->container[$name];
+    public function __construct() {
+        parent::__construct();
+        $this->initServices();
+    }
+
+    private function initServices(): void {
+        $this['plugin'] = function($c) {
+            return new Plugin();
+        };
+        // Register other access-control-specific services here
+    }
+
+    public function offsetGet($offset) {
+        if (parent::offsetExists($offset)) {
+            return parent::offsetGet($offset);
         }
-        return null;
+        // Delegate to core container if not found locally
+        $coreContainer = \PCG\CampaignCore\Core\Container::getInstance();
+        return $coreContainer->offsetExists($offset) ? $coreContainer->offsetGet($offset) : null;
     }
-
-    public function __isset($name) {
-        return isset($this->container[$name]);
-    }
-
-    // ArrayAccess implementation
-    public function offsetExists($offset): bool {
-        return isset($this->container[$offset]);
-    }
-
-    #[\ReturnTypeWillChange]
-    public function offsetGet($offset): mixed {
-        return $this->container[$offset] ?? null;
-    }
-
-    public function offsetSet($offset, $value): void {
-        if (is_null($offset)) {
-            $this->container[] = $value;
-        } else {
-            $this->container[$offset] = $value;
-        }
-    }
-
-    public function offsetUnset($offset): void {
-        unset($this->container[$offset]);
-    }
-} 
+}
