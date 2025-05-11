@@ -4,7 +4,7 @@ namespace PCG\CampaignCore\Core\Taxonomies;
 class CampaignCoreTaxonomies extends TaxonomyManager {
     protected $taxonomies = [
         'campaign_type' => [
-            'post_types' => ['cc_campaign'],
+            'post_types' => ['cc_campaign_entry'],
             'labels' => [
                 'name' => 'Campaign Types',
                 'singular_name' => 'Campaign Type',

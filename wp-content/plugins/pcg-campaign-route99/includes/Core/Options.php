@@ -6,6 +6,9 @@ use PCG\CampaignBase\Core\Options as CampaignOptions;
 class Options extends CampaignOptions {
     private static $options = [
         'route99_version' => PCG_CAMPAIGN_ROUTE99_VERSION,
+        'campaign_title' => 'Route 99',
+        'campaign_description' => 'A Kids on Bikes campaign set on Route 99.',
+        'campaign_image' => '',
         'enable_locations' => true,
         'enable_mysteries' => true,
         'enable_discoveries' => true,

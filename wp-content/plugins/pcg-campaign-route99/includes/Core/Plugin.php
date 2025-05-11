@@ -37,6 +37,7 @@ class Plugin implements PluginInterface {
         add_action('init', [$this, 'init']);
         add_action('admin_menu', [$this, 'addMenuPage']);
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminAssets']);
+        add_action('pre_get_posts', [$this, 'filter_campaign_entries_by_campaign']);
         
         // Register activation/deactivation hooks
         register_activation_hook(PCG_CAMPAIGN_ROUTE99_PLUGIN_DIR . 'pcg-campaign-route99.php', [$this, 'activate']);
@@ -67,6 +68,29 @@ class Plugin implements PluginInterface {
             'manage_options',
             'route99-settings',
             [$this, 'renderSettingsPage']
+        );
+
+        add_submenu_page(
+            'route99',
+            __('Entries', 'route99'),
+            __('Entries', 'route99'),
+            'edit_posts',
+            'route99-entries',
+            function() {
+                // Get the campaign post by slug
+                $campaign = get_page_by_path('route-99', OBJECT, 'campaign');
+                if ($campaign) {
+                    $url = add_query_arg([
+                        'post_type'   => 'cc_campaign_entry',
+                        'campaign_id' => $campaign->ID,
+                    ], admin_url('edit.php'));
+                } else {
+                    // Fallback: go to entries list without filter
+                    $url = admin_url('edit.php?post_type=cc_campaign_entry');
+                }
+                echo '<script>window.location.replace(' . wp_json_encode($url) . ');</script>';
+                exit;
+            }
         );
     }
 
@@ -107,15 +131,39 @@ class Plugin implements PluginInterface {
     }
 
     public function renderSettingsPage(): void {
+        // Handle form submission
+        if (isset($_POST['route99_campaign_settings_nonce']) && wp_verify_nonce($_POST['route99_campaign_settings_nonce'], 'route99_campaign_settings')) {
+            if (current_user_can('manage_options')) {
+                update_option('campaign_title', sanitize_text_field($_POST['campaign_title']));
+                update_option('campaign_description', sanitize_textarea_field($_POST['campaign_description']));
+                update_option('campaign_image', esc_url_raw($_POST['campaign_image']));
+                echo '<div class="updated"><p>' . __('Campaign settings updated.', 'route99') . '</p></div>';
+            }
+        }
+
+        $title = get_option('campaign_title', 'Route 99');
+        $description = get_option('campaign_description', 'A Kids on Bikes campaign set on Route 99.');
+        $image = get_option('campaign_image', '');
         ?>
         <div class="wrap">
-            <h1><?php _e('Route 99 Settings', 'route99'); ?></h1>
-            <form method="post" action="options.php">
-                <?php
-                settings_fields('route99_options');
-                do_settings_sections('route99-settings');
-                submit_button();
-                ?>
+            <h1><?php _e('Route 99 Campaign Settings', 'route99'); ?></h1>
+            <form method="post" action="">
+                <?php wp_nonce_field('route99_campaign_settings', 'route99_campaign_settings_nonce'); ?>
+                <table class="form-table">
+                    <tr>
+                        <th scope="row"><label for="campaign_title"><?php _e('Campaign Title', 'route99'); ?></label></th>
+                        <td><input name="campaign_title" type="text" id="campaign_title" value="<?php echo esc_attr($title); ?>" class="regular-text" /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="campaign_description"><?php _e('Campaign Description', 'route99'); ?></label></th>
+                        <td><textarea name="campaign_description" id="campaign_description" rows="5" class="large-text"><?php echo esc_textarea($description); ?></textarea></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="campaign_image"><?php _e('Campaign Image URL', 'route99'); ?></label></th>
+                        <td><input name="campaign_image" type="text" id="campaign_image" value="<?php echo esc_url($image); ?>" class="regular-text" /></td>
+                    </tr>
+                </table>
+                <?php submit_button(__('Save Campaign Settings', 'route99')); ?>
             </form>
         </div>
         <?php
@@ -165,5 +213,21 @@ class Plugin implements PluginInterface {
 
     public function get_plugin_url(): string {
         return PCG_CAMPAIGN_ROUTE99_PLUGIN_URL;
+    }
+
+    public function filter_campaign_entries_by_campaign($query) {
+        if (!is_admin() || !$query->is_main_query()) {
+            return;
+        }
+        global $pagenow;
+        if ($pagenow === 'edit.php' && isset($_GET['post_type']) && $_GET['post_type'] === 'cc_campaign_entry' && isset($_GET['associated_campaign'])) {
+            $meta_query = $query->get('meta_query', []);
+            $meta_query[] = [
+                'key' => '_associated_campaign',
+                'value' => sanitize_text_field($_GET['associated_campaign']),
+                'compare' => '=',
+            ];
+            $query->set('meta_query', $meta_query);
+        }
     }
 } 

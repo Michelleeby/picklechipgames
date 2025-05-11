@@ -50,7 +50,7 @@ class CampaignCoreBlocks {
         }
 
         $campaign = get_post($attributes['campaignId']);
-        if (!$campaign || $campaign->post_type !== 'cc_campaign') {
+        if (!$campaign || $campaign->post_type !== 'cc_campaign_entry') {
             return '';
         }
 

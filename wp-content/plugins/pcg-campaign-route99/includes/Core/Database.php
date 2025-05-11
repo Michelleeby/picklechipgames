@@ -81,4 +81,57 @@ class Database extends CampaignDatabase {
             $wpdb->query("DROP TABLE IF EXISTS $table");
         }
     }
+
+    /**
+     * Creates the Route 99 campaign if it doesn't exist
+     * 
+     * @return int|false The campaign ID if created successfully, false otherwise
+     */
+    public static function create_route99_campaign() {
+        global $wpdb;
+        
+        // Check if campaign already exists
+        $campaign_id = $wpdb->get_var(
+            $wpdb->prepare(
+                "SELECT ID FROM {$wpdb->posts} 
+                WHERE post_type = 'campaign' 
+                AND post_title = %s 
+                AND post_status = 'publish'",
+                'Route 99'
+            )
+        );
+
+        if ($campaign_id) {
+            return $campaign_id;
+        }
+
+        // Create the campaign
+        $campaign_data = array(
+            'post_title'    => 'Route 99',
+            'post_content'  => 'A mysterious journey along the historic Route 99, where strange occurrences and supernatural events await.',
+            'post_status'   => 'publish',
+            'post_type'     => 'campaign',
+            'post_author'   => 1
+        );
+
+        $campaign_id = wp_insert_post($campaign_data);
+
+        if ($campaign_id) {
+            // Add campaign metadata
+            update_post_meta($campaign_id, '_campaign_type', 'route99');
+            update_post_meta($campaign_id, '_campaign_status', 'active');
+            update_post_meta($campaign_id, '_campaign_start_date', current_time('mysql'));
+            
+            // Set campaign settings
+            $settings = array(
+                'allow_character_creation' => true,
+                'max_characters_per_user' => 1,
+                'allow_location_discovery' => true,
+                'allow_mystery_tracking' => true
+            );
+            update_post_meta($campaign_id, '_campaign_settings', $settings);
+        }
+
+        return $campaign_id;
+    }
 } 
