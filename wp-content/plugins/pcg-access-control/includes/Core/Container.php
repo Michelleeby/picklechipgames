@@ -1,11 +1,10 @@
 <?php
-namespace PCG\AccessControl\Core;
+  namespace PCG\AccessControl\Core;
 
-use PCG\Shared\BaseContainer;
+use PCG\CampaignCore\Core\Container as BaseContainer;
 
 class Container extends BaseContainer {
     private static $instance = null;
-
     public static function getInstance(): self {
         if (null === self::$instance) {
             self::$instance = new self();
