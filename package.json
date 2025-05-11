@@ -5,9 +5,11 @@
   "scripts": {
     "build": "wp-scripts build",
     "start": "wp-scripts start",
-    "update-plugins": "./run-plugin-script.sh update-plugins.sh",
-    "install-plugins": "./run-plugin-script.sh install-plugins.sh",
-    "build-plugins": "./run-plugin-script.sh build-plugins.sh"
+    "plugins:install": "./pcg-utils-install-plugins.sh",
+    "plugins:update": "./pcg-utils-update-plugins.sh",
+    "plugins:build": "./pcg-utils-build-plugins.sh",
+    "plugins:generate-imports": "./pcg-utils-generate-block-imports.sh",
+    "plugins:deploy-prep": "npm run plugins:install && npm run plugins:update && npm run plugins:generate-imports && npm run plugins:build"
   },
   "devDependencies": {
     "@wordpress/scripts": "^30.16.0"
