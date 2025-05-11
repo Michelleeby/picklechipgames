@@ -100,3 +100,6 @@ __pycache__/
 
 # WordPress Gutenberg Utility Scripts
 wp-gutenberg-utils/
+
+# Documentation
+docs/
