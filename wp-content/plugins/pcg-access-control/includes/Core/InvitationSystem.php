@@ -143,7 +143,19 @@ class InvitationSystem {
         return $errors;
     }
 
-    private function is_valid_invitation($code) {
+    public function is_valid_invitation($code) {
+        // Public wrapper that can add additional validation or logging
+        if (empty($code)) {
+            return false;
+        }
+        
+        // Log validation attempts if needed
+        do_action('pcg_invitation_validation_attempt', $code);
+        
+        return $this->validate_invitation_internal($code);
+    }
+
+    private function validate_invitation_internal($code) {
         global $wpdb;
         $table_name = $wpdb->prefix . 'pcg_invitations';
         
