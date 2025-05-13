@@ -125,12 +125,12 @@ export default function Edit({ attributes, setAttributes }) {
 					<h3>{__('STATS', 'pcg-character-creator')}</h3>
 					<div className="pcg-stats-grid">
 						{[
-							{ key: 'brains', label: 'STAT NAME' },
-							{ key: 'brawn', label: 'STAT NAME' },
-							{ key: 'fight', label: 'STAT NAME' },
-							{ key: 'flight', label: 'STAT NAME' },
-							{ key: 'grit', label: 'STAT NAME' },
-							{ key: 'charm', label: 'STAT NAME' },
+							{ key: 'brains', label: 'Brains' },
+							{ key: 'brawn', label: 'Brawn' },
+							{ key: 'fight', label: 'Fight' },
+							{ key: 'flight', label: 'Flight' },
+							{ key: 'grit', label: 'Grit' },
+							{ key: 'charm', label: 'Charm' },
 						].map(stat => {
 							const currentDie = attributes[`${stat.key}Die`] || 'd4';
 							const dieIndex = diceTypes.indexOf(currentDie);
@@ -148,7 +148,7 @@ export default function Edit({ attributes, setAttributes }) {
 										/>
 										<div className="pcg-stat-image-container">
 											<img
-												src={require(`./images/${currentDie}.png`)}
+												src={window.pcgCharacterCreator.getImageUrlBase + currentDie + window.pcgCharacterCreator.imageExtension}
 												alt={currentDie}
 												className="pcg-die-image"
 											/>
@@ -161,7 +161,6 @@ export default function Edit({ attributes, setAttributes }) {
 											disabled={dieIndex === diceTypes.length - 1}
 										/>
 									</div>
-									<div className="pcg-stat-value-label">VALUE</div>
 									<div className="pcg-stat-value">{getDieValue(currentDie)}</div>
 								</div>
 							);

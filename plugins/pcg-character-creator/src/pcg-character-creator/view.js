@@ -40,6 +40,11 @@ ready(() => {
         }
         
         try {
+            // Define helper functions
+            function getImageUrl(filename) {
+                return window.pcgCharacterCreator.getImageUrl.replace(window.pcgCharacterCreator.filenamePlaceholder, filename);
+            }
+
             // Create the main character sheet container
             const characterSheet = document.createElement('div');
             characterSheet.className = 'pcg-character-sheet';
@@ -143,8 +148,7 @@ ready(() => {
                 statImageContainer.className = 'pcg-stat-image-container';
                 
                 const dieImage = document.createElement('img');
-                // Use WordPress uploads directory path
-                dieImage.src = `${window.pcgCharacterCreator.uploadDir}/${die}.png`;
+                dieImage.src = window.pcgCharacterCreator.getImageUrlBase + die + window.pcgCharacterCreator.imageExtension;
                 dieImage.alt = die;
                 dieImage.className = 'pcg-die-image';
                 
