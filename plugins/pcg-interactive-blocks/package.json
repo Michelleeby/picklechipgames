@@ -1,0 +1,17 @@
+{
+	"name": "pcg-interactive-blocks",
+	"version": "0.1.0",
+	"description": "An interactive block with the Interactivity API.",
+	"author": "The WordPress Contributors",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"files": [
+		"[^.]*"
+	],
+	"dependencies": {
+		"@wordpress/interactivity": "^6.23.0"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^30.16.0"
+	}
+}
