@@ -27,7 +27,8 @@ jobs:
             if [ -f "$dir/package.json" ]; then
               echo "Building blocks in $dir"
               pushd "$dir" || exit
-              npm run build
+              mkdir -p ../build
+              npm run build -- --output-path ../build
               popd || exit
             fi
           done
