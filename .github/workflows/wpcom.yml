@@ -22,13 +22,18 @@ jobs:
         run: npm install
         
       - name: Build blocks
-        run: npm run build
-        
-      - name: Minify CSS
-        run: npm run minify-css
-        
+        run: |
+          for dir in $(find plugins -type d -name src); do
+            if [ -f "$dir/package.json" ]; then
+              echo "Building blocks in $dir"
+              pushd "$dir" || exit
+              npm run build
+              popd || exit
+            fi
+          done
+          
       - uses: php-actions/composer@v6
-      
+
       - name: Upload the artifact
         uses: actions/upload-artifact@v4
         with:
