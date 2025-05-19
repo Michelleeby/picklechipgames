@@ -10,11 +10,13 @@ wp_interactivity_state(
     )
 );
 
-$wrapper_attributes = get_block_wrapper_attributes([
+$wrapper_attributes = get_block_wrapper_attributes(
+    [
     'class' => 'pcg-dice-roller',
     'data-wp-interactive' => 'pcg-interactive-blocks/dice-roller',
     'data-wp-watch' => 'callbacks.logTotal',
-]);
+    ]
+);
 ?>
 
 <div

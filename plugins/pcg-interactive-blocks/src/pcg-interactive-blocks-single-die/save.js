@@ -1,6 +1,7 @@
 import { useBlockProps } from '@wordpress/block-editor';
 
-export default function Save({ attributes }) {
+export default function Save({ attributes })
+{
     const { sides, imageUrl } = attributes;
     const blockProps = useBlockProps.save();
 

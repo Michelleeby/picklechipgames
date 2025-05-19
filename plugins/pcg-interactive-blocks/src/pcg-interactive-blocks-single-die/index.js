@@ -26,14 +26,16 @@ import metadata from './block.json';
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType(metadata.name, {
-	...metadata,
-	/**
-	 * @see ./edit.js
-	 */
-	edit: Edit,
-	/**
-	 * @see ./save.js
-	 */
-	save: () => null,
-});
+registerBlockType(
+    metadata.name, {
+        ...metadata,
+        /**
+         * @see ./edit.js
+         */
+        edit: Edit,
+        /**
+         * @see ./save.js
+         */
+        save: () => null,
+    }
+);

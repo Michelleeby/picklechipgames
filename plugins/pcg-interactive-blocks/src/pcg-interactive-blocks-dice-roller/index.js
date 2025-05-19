@@ -31,7 +31,8 @@ const TEMPLATE = [
     ['pcg-interactive-blocks/single-die', { sides: 20 }]
 ];
 
-function Edit() {
+function Edit()
+{
     const blockProps = useBlockProps();
 
     return (
@@ -47,7 +48,8 @@ function Edit() {
     );
 }
 
-function Save() {
+function Save()
+{
     const blockProps = useBlockProps.save();
     
     return (
@@ -64,8 +66,10 @@ function Save() {
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-registerBlockType(metadata.name, {
-	...metadata,
-    edit: Edit,
-    save: Save
-});
+registerBlockType(
+    metadata.name, {
+        ...metadata,
+        edit: Edit,
+        save: Save
+    }
+);
