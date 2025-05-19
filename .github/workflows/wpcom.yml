@@ -32,8 +32,6 @@ jobs:
             fi
           done
           
-      - uses: php-actions/composer@v6
-
       - name: Upload the artifact
         uses: actions/upload-artifact@v4
         with:
