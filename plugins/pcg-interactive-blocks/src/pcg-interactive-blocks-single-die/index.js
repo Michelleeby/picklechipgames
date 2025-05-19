@@ -4,7 +4,6 @@
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
 import { registerBlockType } from '@wordpress/blocks';
-import { SVG, Path, Text, Title } from '@wordpress/primitives';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -20,7 +19,6 @@ import './style.scss';
  * Internal dependencies
  */
 import Edit from './edit';
-import { dice, transforms } from './icons.js';
 import metadata from './block.json';
 
 /**
@@ -38,5 +36,4 @@ registerBlockType(metadata.name, {
 	 * @see ./save.js
 	 */
 	save: () => null,
-	variations: dice,
 });

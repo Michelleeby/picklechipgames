@@ -1,9 +1,7 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, InspectorControls, BlockControls } from '@wordpress/block-editor';
-import { PanelBody, SelectControl, DropdownMenu } from '@wordpress/components';
+import { useBlockProps } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 import { useEffect } from '@wordpress/element';
-import { dice } from './icons';
 
 export default function Edit({ attributes, setAttributes }) {
     const { sides, imageUrl } = attributes;
