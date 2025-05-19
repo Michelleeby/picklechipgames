@@ -66,10 +66,9 @@ function Save()
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-registerBlockType(
-    metadata.name, {
-        ...metadata,
-        edit: Edit,
-        save: Save
-    }
-);
+registerBlockType( metadata.name,
+{
+    ...metadata,
+    edit: Edit,
+    save: Save
+});

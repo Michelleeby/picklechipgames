@@ -1,7 +1,23 @@
 <?php
+/**
+ * Server-side render callback for the single die block.
+ * 
+ * @param array $attributes The array of attributes for the block.
+ * @param string $content The markup of the block as stored in the database, if any.
+ * @param WP_Block $block The instance of the WP_Block class that represents the
+ * rendered block (metadata of the block).
+ * 
+ * @return string The rendered block.
+ */
 $unique_id = wp_unique_id('die-');
 $upload_dir = wp_upload_dir();
-$die_image_url = esc_url($upload_dir['baseurl'] . '/d' . $attributes['sides'] . '.png');
+$die_image_url = esc_url(
+    sprintf( 
+        '%s/d%d.png', 
+        $upload_dir['baseurl'], 
+        $attributes['sides']
+    )
+);
 $attributes['imageUrl'] = $die_image_url;
 $sides = intval($attributes['sides']);
 
