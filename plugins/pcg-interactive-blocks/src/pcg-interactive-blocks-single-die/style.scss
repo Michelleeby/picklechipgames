@@ -1,0 +1,88 @@
+.pcg-die {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100px;
+    perspective: 1000px;
+}
+
+.pcg-die-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s ease-out;
+}
+
+.pcg-die-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.pcg-die-image.rolling {
+    animation: roll 1s ease-out;
+}
+
+.pcg-die-value {
+    position: static;
+    top: auto;
+    left: auto;
+    transform: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #222;
+    text-shadow: none;
+    margin-left: 16px;
+    transition: color 0.2s, font-weight 0.2s, transform 0.2s;
+}
+.pcg-die-value.rolling {
+    color: #e67e22;
+    animation: jitter 0.5s linear infinite;
+    font-weight: normal;
+    transform: scale(1);
+}
+
+@keyframes jitter {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-2px); }
+    40% { transform: translateX(2px); }
+    60% { transform: translateX(-2px); }
+    80% { transform: translateX(2px); }
+    100% { transform: translateX(0); }
+}
+
+.pcg-die-value.landed {
+    color: #27ae60;
+    font-weight: 900;
+    transform: scale(1.4);
+    transition: color 0.2s, font-weight 0.2s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pcg-die-value.exploded {
+    color: #ffeb3b;
+    text-shadow: 0 0 8px #ff9800, 0 0 16px #fff176;
+    animation: explode-bounce 0.6s cubic-bezier(0.22, 1, 0.36, 1) 1;
+    font-weight: 900;
+}
+
+@keyframes explode-bounce {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.5) rotate(-8deg); }
+    50% { transform: scale(1.2) rotate(8deg); }
+    70% { transform: scale(1.4) rotate(-4deg); }
+    100% { transform: scale(1) rotate(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pcg-die-value.rolling,
+    .pcg-die-value.landed,
+    .pcg-die-value.exploded {
+        animation: none;
+        transform: none;
+        transition: none;
+        text-shadow: none;
+    }
+}

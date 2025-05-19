@@ -1,0 +1,26 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "pcg-interactive-blocks/dice-roller",
+    "version": "0.1.0",
+    "title": "PCG Interactive Blocks - Dice Roller",
+    "category": "pcg-interactive-blocks",
+    "icon": "media-interactive",
+    "description": "An interactive block that will be used to roll dice on the frontend.",
+    "example": {},
+    "supports": {
+        "interactivity": true,
+        "html": false
+    },
+    "attributes": {
+        "total": {
+            "type": "number",
+            "default": 0
+        }
+    },
+    "textdomain": "pcg-interactive-blocks",
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "style": "file:./style-index.css",
+    "render": "file:./render.php"
+} 

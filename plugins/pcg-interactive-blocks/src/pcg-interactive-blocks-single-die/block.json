@@ -1,0 +1,32 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "pcg-interactive-blocks/single-die",
+    "version": "0.1.0",
+    "title": "PCG Interactive Blocks - Single Die",
+    "category": "pcg-interactive-blocks",
+    "icon": "media-interactive",
+    "description": "A single die that can be rolled.",
+    "example": {},
+    "supports": {
+        "interactivity": true
+    },
+    "attributes": {
+        "sides": {
+            "description": "The number of sides on the die.",
+            "type": "number",
+            "default": 6
+        },
+        "imageUrl": {
+            "description": "The asset URL of the die image.",
+            "type": "string",
+            "default": ""
+        }
+    },
+    "textdomain": "pcg-interactive-blocks",
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "style": "file:./style-index.css",
+    "render": "file:./render.php",
+    "viewScriptModule": "file:./view.js"
+} 
