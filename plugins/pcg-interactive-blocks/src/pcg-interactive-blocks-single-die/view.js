@@ -11,8 +11,11 @@ const { state } = store('pcg-interactive-blocks/dice-roller', {
             if (context.rolling) return;
         
             context.rolling = true;
+            context.imagePressed = true;
             context.landed = false;
-            context.exploded = false; // Reset explosion on new roll
+            context.exploded = false;
+            setTimeout(() => { context.imagePressed = false; }, 150);
+            
             let rollCount = 0;
             const maxRolls = 18;
         

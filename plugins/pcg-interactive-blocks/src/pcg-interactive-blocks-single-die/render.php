@@ -28,6 +28,7 @@ $context_data = array(
             src="<?php echo esc_url($die_image_url); ?>"
             alt="<?php esc_attr_e('Die', 'pcg-interactive-blocks'); ?>"
             class="pcg-die-image"
+            data-wp-class--pressed="context.imagePressed"
         />
     </div>
     <div 
