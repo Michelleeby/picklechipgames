@@ -37,7 +37,6 @@ const { state } = store(
                         const interval = easeOutInterval(progress);
                         setTimeout(doRoll, interval);
                     } else {
-                        // Final value
                         const finalValue = Math.floor(Math.random() * context.sides) + 1;
                         context.currentValue = finalValue;
                         state.total += finalValue;
