@@ -10,7 +10,8 @@
     "server:logs:test": "wp-env logs test",
     "server:logs": "wp-env logs",
     "build:blocks:interactive": "cd plugins/pcg-interactive-blocks/src && wp-scripts build --experimental-modules",
-    "start:blocks:interactive": "cd plugins/pcg-interactive-blocks/src && wp-scripts start --experimental-modules"
+    "start:blocks:interactive": "cd plugins/pcg-interactive-blocks/src && wp-scripts start --experimental-modules",
+    "build": "npm run build:blocks:interactive"
   },
   "devDependencies": {
     "@wordpress/scripts": "^30.16.0"
