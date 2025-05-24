@@ -9,8 +9,8 @@
     "server:logs:dev": "wp-env logs development",
     "server:logs:test": "wp-env logs test",
     "server:logs": "wp-env logs",
-    "build:blocks:interactive": "cd plugins/pcg-interactive-blocks/src && wp-scripts build --experimental-modules",
-    "start:blocks:interactive": "cd plugins/pcg-interactive-blocks/src && wp-scripts start --experimental-modules",
+    "build:blocks:interactive": "cd plugins/pcg-interactive-blocks && wp-scripts build --experimental-modules",
+    "start:blocks:interactive": "cd plugins/pcg-interactive-blocks && wp-scripts start --experimental-modules",
     "build": "npm run build:blocks:interactive"
   },
   "devDependencies": {

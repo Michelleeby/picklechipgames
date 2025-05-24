@@ -8,13 +8,6 @@
 	"files": [
 		"[^.]*"
 	],
-	"scripts": {
-		"cd:root": "cd plugins/pcg-interactive-blocks",
-		"__phpcs": "vendor/bin/phpcs -ps . --standard=WordPress --ignore=vendor/,node_modules/,build/,assets/,ai/",
-		"__phpcbf": "vendor/bin/phpcbf -ps . --standard=WordPress --ignore=vendor/,node_modules/,build/,assets/,ai/",
-		"lint:php": "npm run cd:root && npm run __lint:php",
-		"__lint:php": "npm run __phpcs && npm run __phpcbf"
-	},
 	"dependencies": {
 		"@wordpress/interactivity": "^6.23.0"
 	},
