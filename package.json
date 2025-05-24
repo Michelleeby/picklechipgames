@@ -3,23 +3,14 @@
   "version": "1.0.0",
   "description": "Pickle Chip Games WordPress Environment",
   "scripts": {
-    "server:up": "wpdev",
+    "docker:up": "open -a docker && while ! docker info > /dev/null 2>&1; do sleep 1 ; done",
+    "server:up": "npm run docker:up && wp-env start",
     "server:down": "wp-env stop",
     "server:logs:dev": "wp-env logs development",
     "server:logs:test": "wp-env logs test",
     "server:logs": "wp-env logs",
-    "__lint:scss": "wp-scripts lint-style $1",
-    "__lint:js": "wp-scripts lint-js $1",
-    "__phpcs": "vendor/bin/phpcs -ps ./plugins/pcg-interactive-blocks --standard=WordPress --ignore=vendor/,node_modules/,build/,assets/,ai/",
-		"__phpcbf": "vendor/bin/phpcbf -ps ./plugins/pcg-interactive-blocks --standard=WordPress --ignore=vendor/,node_modules/,build/,assets/,ai/",
-    "__build": "wp-scripts build $@",
-    "__start": "wp-scripts start $@",
-    "cd:root": "cd plugins/pcg-interactive-blocks",
-    "cd:src": "cd plugins/pcg-interactive-blocks/src",
-    "lint:scss": "npm run cd:src && npm run __lint:scss ./src/**/*.scss",
-    "lint:js": "npm run cd:src && npm run __lint:js ./src/**/*.js",
-    "lint:php": "npm run __phpcs",
-    "fix:php": "npm run __phpcbf"
+    "build:blocks:interactive": "cd plugins/pcg-interactive-blocks/src && wp-scripts build --experimental-modules",
+    "start:blocks:interactive": "cd plugins/pcg-interactive-blocks/src && wp-scripts start --experimental-modules"
   },
   "devDependencies": {
     "@wordpress/scripts": "^30.16.0"
